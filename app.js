@@ -9,6 +9,9 @@ import bookRouter from "./routes/bookRouter.js";
 import borrowRouter from "./routes/borrowRouter.js";
 import userRouter from "./routes/userRouter.js";
 import expressFileupload from "express-fileupload";
+import { notifyUsers } from "./services/notifyUsers.js";
+import { removeUnverifiedAccounts } from "./services/removeUnverifiedAccounts.js";
+
 export const app = express();
 
 config({ path: "./config/config.env" });
@@ -37,6 +40,8 @@ app.use("/api/v1/book", bookRouter);
 app.use("/api/v1/borrow", borrowRouter);
 app.use("/api/v1/user", userRouter);
 
+notifyUsers();
+removeUnverifiedAccounts();
 connectDB();
 
 app.use(errorMiddleware);

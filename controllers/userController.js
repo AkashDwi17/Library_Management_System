@@ -3,6 +3,7 @@ import { ErrorHandler } from "../middlewares/errorMiddlewares.js";
 import { User } from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import { v2 as cloudinary } from "cloudinary";
+
 export const getAllUsers = catchAsyncErrors(async (req, res, next) => {
   const users = await User.find({ accountVerified: true });
   res.status(200).json({
